@@ -615,7 +615,7 @@ function renderResults(){
   if(badge){
     const target = activeDS==='mnist'?th.mnist_acc:th.fashion_acc;
     const diff = (ds.mean - (activeDS==='mnist'?run.mnist.mlp:run.fashion.mlp)).toFixed(1);
-    const pSave = Math.round((1-ds.params/ds.mlp_p)*100);
+    const pSave = Math.round((1-ds.params_mean/ds.mlp_p)*100);
     badge.innerHTML =
       `<span style="color:var(--green)">✓ ${ds.mean.toFixed(1)}±${ds.std.toFixed(1)}%</span>`+
       ` &nbsp;·&nbsp; <span style="color:var(--green)">+${diff}pp vs MLP</span>`+
@@ -629,8 +629,8 @@ function renderResults(){
 }
 
 // ── Gráfico de convergência ──────────────────────────────────
-function drawConvergence(ds, target){
-  const cid = 'cvMain';
+function drawConvergence(ds, target, cid){
+  cid = cid || 'cvMain';
   const c = document.getElementById(cid);
   if(!c) return;
   const ctx = c.getContext('2d');
@@ -869,13 +869,13 @@ function buildTable(ds, dsName){
   const th = DATA.theory;
   const target = dsName==='mnist'?th.mnist_acc:th.fashion_acc;
   const tParams = dsName==='mnist'?th.mnist_params:th.fashion_params;
-  const pSave = Math.round((1-ds.params/ds.mlp_p)*100);
+  const pSave = Math.round((1-ds.params_mean/ds.mlp_p)*100);
 
   tbody.innerHTML = `
     <tr class="hl">
       <td style="font-family:var(--mono);color:var(--accent);font-weight:700">dNaty (real)</td>
       <td style="color:var(--green);font-weight:700">${ds.mean.toFixed(1)} ± ${ds.std.toFixed(1)}%</td>
-      <td style="color:var(--mid)">${(ds.params/1000).toFixed(1)}K</td>
+      <td style="color:var(--mid)">${(ds.params_mean/1000).toFixed(1)}K</td>
       <td style="color:${ds.tp<0.05?'var(--green)':'var(--gold)'};font-size:11px">p=${ds.tp} ${ds.tp<0.05?'✓':''} · d=${ds.td}</td>
     </tr>
     <tr style="background:rgba(240,192,96,0.05)">
