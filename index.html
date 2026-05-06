@@ -1036,7 +1036,7 @@ function drawCLChart(cl){
   ctx.fillStyle='#05070f'; ctx.fillRect(0,0,W,H);
   const pad={t:12,r:18,b:32,l:60};
   const W2=W-pad.l-pad.r,H2=H-pad.t-pad.b;
-  const allBWT=[...cl.db_s,...cl.eb_s,...cl.mb_s];
+  const allBWT=[...cl.seeds_d.map(s=>s.bwt),...cl.seeds_e,...cl.seeds_m];
   const vMin=Math.min(...allBWT)*1.15,vMax=0.06;
   const xS=i=>pad.l+(i/4)*W2;
   const yS=v=>pad.t+H2-((v-vMin)/(vMax-vMin))*H2;
@@ -1068,9 +1068,9 @@ function drawCLChart(cl){
   ctx.fillText('Teoria: '+DATA.theory.cl_bwt,pad.l+W2,thY-3); ctx.textAlign='left';
 
   const series=[
-    {data:cl.db_s,color:'#50e0a0'},
-    {data:cl.eb_s,color:'#ff6080'},
-    {data:cl.mb_s,color:'#8898bb'}
+    {data:cl.seeds_d.map(s=>s.bwt),color:'#50e0a0'},
+    {data:cl.seeds_e,color:'#ff6080'},
+    {data:cl.seeds_m,color:'#8898bb'}
   ];
   series.forEach(({data,color})=>{
     ctx.strokeStyle=color; ctx.lineWidth=2.5;
