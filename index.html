@@ -132,6 +132,14 @@ footer{text-align:center;color:var(--dim);font-size:11px;font-family:var(--mono)
 <!-- ══ ABSTRACT ══ -->
 <div id="tab-abstract" class="tab active">
   <div class="real-badge">✓ Dados reais — experimentos executados em 2026-05-05</div>
+  <div class="callout" style="border-color:var(--green);background:rgba(80,224,160,0.08);margin-bottom:24px">
+    <div class="callout-title" style="color:var(--green)">🚀 Engine v2.0.3 — Correções Críticas de Corretude (19 de julho)</div>
+    <div class="callout-body">
+      8 bug-fixes em produção: skip connections agora em nn.ModuleList (treinam/persistem/GPU-movem), quant_aware+latency combinados, episodic-memory attribution corrigida, eval-mode accuracy, latency-predictor com todas as features, adaptive acc_floor, drift-detector edge-bin clipping, evaluate() mode restoration.
+      <a href="https://github.com/pedrovergueiro/dNaty/releases/tag/v2.0.3" target="_blank" style="color:var(--green);font-weight:600">Release notes →</a> ·
+      <a href="https://pypi.org/project/dnaty/2.0.3/" target="_blank" style="color:var(--green);font-weight:600">PyPI →</a>
+    </div>
+  </div>
   <h2 class="section-title">Abstract</h2>
   <div class="box" style="border-color:var(--accent);background:var(--accentS)">
     <p style="font-size:15px;color:var(--text);line-height:1.95;font-style:italic">
